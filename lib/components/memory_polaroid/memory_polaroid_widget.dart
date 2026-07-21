@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'memory_polaroid_model.dart';
 export 'memory_polaroid_model.dart';
 
@@ -16,10 +13,10 @@ class MemoryPolaroidWidget extends StatefulWidget {
     String? title,
     String? caption,
     String? date,
-  })  : this.imageDesc = imageDesc ?? '',
-        this.title = title ?? '',
-        this.caption = caption ?? '',
-        this.date = date ?? '';
+  })  : imageDesc = imageDesc ?? '',
+        title = title ?? '',
+        caption = caption ?? '',
+        date = date ?? '';
 
   final String imageDesc;
   final String title;
@@ -55,7 +52,7 @@ class _MemoryPolaroidWidgetState extends State<MemoryPolaroidWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: Container(
         child: Container(
           decoration: BoxDecoration(
@@ -64,7 +61,7 @@ class _MemoryPolaroidWidgetState extends State<MemoryPolaroidWidget> {
             shape: BoxShape.rectangle,
           ),
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Container(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -81,24 +78,24 @@ class _MemoryPolaroidWidgetState extends State<MemoryPolaroidWidget> {
                           shape: BoxShape.rectangle,
                         ),
                         child: CachedNetworkImage(
-                          fadeInDuration: Duration(milliseconds: 0),
-                          fadeOutDuration: Duration(milliseconds: 0),
-                          imageUrl: widget!.imageDesc,
+                          fadeInDuration: const Duration(milliseconds: 0),
+                          fadeOutDuration: const Duration(milliseconds: 0),
+                          imageUrl: widget.imageDesc,
                           fit: BoxFit.cover,
-                          alignment: Alignment(0.0, 0.0),
+                          alignment: const Alignment(0.0, 0.0),
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          widget!.title,
+                          widget.title,
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -119,7 +116,7 @@ class _MemoryPolaroidWidgetState extends State<MemoryPolaroidWidget> {
                               ),
                         ),
                         Text(
-                          widget!.caption,
+                          widget.caption,
                           maxLines: 2,
                           style: FlutterFlowTheme.of(context)
                               .bodySmall
@@ -152,7 +149,7 @@ class _MemoryPolaroidWidgetState extends State<MemoryPolaroidWidget> {
                             Flexible(
                               flex: 1,
                               child: Text(
-                                widget!.date,
+                                widget.date,
                                 maxLines: 1,
                                 style: FlutterFlowTheme.of(context)
                                     .labelSmall
@@ -186,10 +183,10 @@ class _MemoryPolaroidWidgetState extends State<MemoryPolaroidWidget> {
                             ),
                           ],
                         ),
-                      ].divide(SizedBox(height: 4.0)),
+                      ].divide(const SizedBox(height: 4.0)),
                     ),
                   ),
-                ].divide(SizedBox(height: 8.0)),
+                ].divide(const SizedBox(height: 8.0)),
               ),
             ),
           ),

@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'goal_progress_model.dart';
 export 'goal_progress_model.dart';
 
@@ -15,9 +12,9 @@ class GoalProgressWidget extends StatefulWidget {
     String? title,
     String? deadline,
     double? progress,
-  })  : this.title = title ?? 'Vacation Savings',
-        this.deadline = deadline ?? 'Due in 3 months',
-        this.progress = progress ?? 0.75;
+  })  : title = title ?? 'Vacation Savings',
+        deadline = deadline ?? 'Due in 3 months',
+        progress = progress ?? 0.75;
 
   final String title;
   final String deadline;
@@ -62,7 +59,7 @@ class _GoalProgressWidgetState extends State<GoalProgressWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -76,7 +73,7 @@ class _GoalProgressWidgetState extends State<GoalProgressWidget> {
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget!.title,
+                      widget.title,
                       'Vacation Savings',
                     ),
                     style: FlutterFlowTheme.of(context).titleSmall.override(
@@ -95,7 +92,7 @@ class _GoalProgressWidgetState extends State<GoalProgressWidget> {
                   ),
                   Text(
                     valueOrDefault<String>(
-                      widget!.deadline,
+                      widget.deadline,
                       'Due in 3 months',
                     ),
                     style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -121,7 +118,7 @@ class _GoalProgressWidgetState extends State<GoalProgressWidget> {
               ),
               LinearPercentIndicator(
                 percent: valueOrDefault<double>(
-                  widget!.progress,
+                  widget.progress,
                   0.75,
                 ),
                 lineHeight: 8.0,
@@ -129,10 +126,10 @@ class _GoalProgressWidgetState extends State<GoalProgressWidget> {
                 animateFromLastPercent: true,
                 progressColor: FlutterFlowTheme.of(context).success,
                 backgroundColor: FlutterFlowTheme.of(context).alternate,
-                barRadius: Radius.circular(4.0),
+                barRadius: const Radius.circular(4.0),
                 padding: EdgeInsets.zero,
               ),
-            ].divide(SizedBox(height: 16.0)),
+            ].divide(const SizedBox(height: 16.0)),
           ),
         ),
       ),

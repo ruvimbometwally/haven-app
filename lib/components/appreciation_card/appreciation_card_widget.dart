@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'appreciation_card_model.dart';
 export 'appreciation_card_model.dart';
 
@@ -15,10 +12,10 @@ class AppreciationCardWidget extends StatefulWidget {
     String? category,
     String? message,
     String? sender,
-  })  : this.tone = tone ?? const Color(0x00000000),
-        this.category = category ?? '',
-        this.message = message ?? '',
-        this.sender = sender ?? '';
+  })  : tone = tone ?? const Color(0x00000000),
+        category = category ?? '',
+        message = message ?? '',
+        sender = sender ?? '';
 
   final Color tone;
   final String category;
@@ -55,7 +52,7 @@ class _AppreciationCardWidgetState extends State<AppreciationCardWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: widget!.tone,
+        color: widget.tone,
         shape: BoxShape.rectangle,
       ),
       child: Column(
@@ -70,15 +67,15 @@ class _AppreciationCardWidgetState extends State<AppreciationCardWidget> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: widget!.tone,
+                  color: widget.tone,
                   borderRadius: BorderRadius.circular(9999.0),
                   shape: BoxShape.rectangle,
                 ),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
                   child: Container(
                     child: Text(
-                      widget!.category,
+                      widget.category,
                       style: FlutterFlowTheme.of(context).labelSmall.override(
                             font: GoogleFonts.outfit(
                               fontWeight: FontWeight.bold,
@@ -100,14 +97,14 @@ class _AppreciationCardWidgetState extends State<AppreciationCardWidget> {
               ),
               Icon(
                 Icons.favorite_rounded,
-                color: widget!.tone,
+                color: widget.tone,
                 size: 18.0,
               ),
             ],
           ),
           Text(
             valueOrDefault<String>(
-              '\"${widget!.message}\"',
+              '\"${widget.message}\"',
               '\"\"',
             ),
             style: FlutterFlowTheme.of(context).titleMedium.override(
@@ -134,12 +131,12 @@ class _AppreciationCardWidgetState extends State<AppreciationCardWidget> {
                 width: 24.0,
                 height: 24.0,
                 decoration: BoxDecoration(
-                  color: widget!.tone,
+                  color: widget.tone,
                   shape: BoxShape.circle,
                 ),
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Text(
-                  widget!.sender,
+                  widget.sender,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -162,7 +159,7 @@ class _AppreciationCardWidgetState extends State<AppreciationCardWidget> {
               ),
               Text(
                 valueOrDefault<String>(
-                  'From ${widget!.sender}',
+                  'From ${widget.sender}',
                   'From ',
                 ),
                 style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -181,9 +178,9 @@ class _AppreciationCardWidgetState extends State<AppreciationCardWidget> {
                       lineHeight: 1.3,
                     ),
               ),
-            ].divide(SizedBox(width: 8.0)),
+            ].divide(const SizedBox(width: 8.0)),
           ),
-        ].divide(SizedBox(height: 16.0)),
+        ].divide(const SizedBox(height: 16.0)),
       ),
     );
   }

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'day_cell_model.dart';
 export 'day_cell_model.dart';
 
@@ -15,10 +12,10 @@ class DayCellWidget extends StatefulWidget {
     String? day,
     bool? isToday,
     bool? hasEvent,
-  })  : this.isSelected = isSelected ?? false,
-        this.day = day ?? '14',
-        this.isToday = isToday ?? false,
-        this.hasEvent = hasEvent ?? false;
+  })  : isSelected = isSelected ?? false,
+        day = day ?? '14',
+        isToday = isToday ?? false,
+        hasEvent = hasEvent ?? false;
 
   final bool isSelected;
   final String day;
@@ -59,10 +56,10 @@ class _DayCellWidgetState extends State<DayCellWidget> {
       decoration: BoxDecoration(
         color: valueOrDefault<Color>(
           valueOrDefault<bool>(
-            widget!.isSelected,
+            widget.isSelected,
             false,
           )
-              ? Color(0x00000000)
+              ? const Color(0x00000000)
               : Colors.transparent,
           Colors.transparent,
         ),
@@ -71,10 +68,10 @@ class _DayCellWidgetState extends State<DayCellWidget> {
         border: Border.all(
           color: valueOrDefault<Color>(
             valueOrDefault<bool>(
-              widget!.isToday,
+              widget.isToday,
               false,
             )
-                ? Color(0x00000000)
+                ? const Color(0x00000000)
                 : Colors.transparent,
             Colors.transparent,
           ),
@@ -88,7 +85,7 @@ class _DayCellWidgetState extends State<DayCellWidget> {
         children: [
           Text(
             valueOrDefault<String>(
-              widget!.day,
+              widget.day,
               '14',
             ),
             style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -100,7 +97,7 @@ class _DayCellWidgetState extends State<DayCellWidget> {
                   ),
                   color: valueOrDefault<Color>(
                     valueOrDefault<bool>(
-                      widget!.isSelected,
+                      widget.isSelected,
                       false,
                     )
                         ? FlutterFlowTheme.of(context).onPrimary
@@ -115,7 +112,7 @@ class _DayCellWidgetState extends State<DayCellWidget> {
                 ),
           ),
           if (valueOrDefault<bool>(
-            widget!.hasEvent,
+            widget.hasEvent,
             false,
           ))
             Container(
@@ -124,10 +121,10 @@ class _DayCellWidgetState extends State<DayCellWidget> {
               decoration: BoxDecoration(
                 color: valueOrDefault<Color>(
                   valueOrDefault<bool>(
-                    widget!.hasEvent,
+                    widget.hasEvent,
                     false,
                   )
-                      ? Color(0x00000000)
+                      ? const Color(0x00000000)
                       : Colors.transparent,
                   Colors.transparent,
                 ),
@@ -135,7 +132,7 @@ class _DayCellWidgetState extends State<DayCellWidget> {
                 shape: BoxShape.rectangle,
               ),
             ),
-        ].divide(SizedBox(height: 4.0)),
+        ].divide(const SizedBox(height: 4.0)),
       ),
     );
   }

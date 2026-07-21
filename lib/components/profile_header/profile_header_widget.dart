@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'profile_header_model.dart';
 export 'profile_header_model.dart';
 
@@ -15,10 +12,10 @@ class ProfileHeaderWidget extends StatefulWidget {
     String? imageDesc,
     String? names,
     String? duration,
-  })  : this.imageDesc = imageDesc ??
+  })  : imageDesc = imageDesc ??
             'https://dimg.dreamflow.cloud/v1/image/Couple%20laughing%20together%20in%20a%20garden',
-        this.names = names ?? 'Sarah & Alex',
-        this.duration = duration ?? '';
+        names = names ?? 'Sarah & Alex',
+        duration = duration ?? '';
 
   final String imageDesc;
   final String names;
@@ -71,14 +68,14 @@ class _ProfileHeaderWidgetState extends State<ProfileHeaderWidget> {
               ),
             ),
             child: CachedNetworkImage(
-              fadeInDuration: Duration(milliseconds: 0),
-              fadeOutDuration: Duration(milliseconds: 0),
+              fadeInDuration: const Duration(milliseconds: 0),
+              fadeOutDuration: const Duration(milliseconds: 0),
               imageUrl: valueOrDefault<String>(
-                widget!.imageDesc,
+                widget.imageDesc,
                 'https://dimg.dreamflow.cloud/v1/image/Couple%20laughing%20together%20in%20a%20garden',
               ),
               fit: BoxFit.cover,
-              alignment: Alignment(0.0, 0.0),
+              alignment: const Alignment(0.0, 0.0),
             ),
           ),
         ),
@@ -89,7 +86,7 @@ class _ProfileHeaderWidgetState extends State<ProfileHeaderWidget> {
           children: [
             Text(
               valueOrDefault<String>(
-                widget!.names,
+                widget.names,
                 'Sarah & Alex',
               ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -113,10 +110,10 @@ class _ProfileHeaderWidgetState extends State<ProfileHeaderWidget> {
                 shape: BoxShape.rectangle,
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
                 child: Container(
                   child: Text(
-                    widget!.duration,
+                    widget.duration,
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           font: GoogleFonts.outfit(
                             fontWeight: FlutterFlowTheme.of(context)
@@ -140,9 +137,9 @@ class _ProfileHeaderWidgetState extends State<ProfileHeaderWidget> {
                 ),
               ),
             ),
-          ].divide(SizedBox(height: 4.0)),
+          ].divide(const SizedBox(height: 4.0)),
         ),
-      ].divide(SizedBox(height: 16.0)),
+      ].divide(const SizedBox(height: 16.0)),
     );
   }
 }

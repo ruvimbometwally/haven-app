@@ -1,11 +1,8 @@
 import '/components/settings_tile/settings_tile_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'settings_group_model.dart';
 export 'settings_group_model.dart';
 
@@ -13,7 +10,7 @@ class SettingsGroupWidget extends StatefulWidget {
   const SettingsGroupWidget({
     super.key,
     String? title,
-  }) : this.title = title ?? 'RELATIONSHIP';
+  }) : title = title ?? 'RELATIONSHIP';
 
   final String title;
 
@@ -51,11 +48,11 @@ class _SettingsGroupWidgetState extends State<SettingsGroupWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
           child: Container(
             child: Text(
               valueOrDefault<String>(
-                widget!.title,
+                widget.title,
                 'RELATIONSHIP',
               ),
               style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -152,7 +149,7 @@ class _SettingsGroupWidgetState extends State<SettingsGroupWidget> {
             ),
           ),
         ),
-      ].divide(SizedBox(height: 16.0)),
+      ].divide(const SizedBox(height: 16.0)),
     );
   }
 }

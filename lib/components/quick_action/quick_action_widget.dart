@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'quick_action_model.dart';
 export 'quick_action_model.dart';
 
@@ -15,9 +12,9 @@ class QuickActionWidget extends StatefulWidget {
     Color? tone,
     this.icon,
     String? label,
-  })  : this.action = action ?? '',
-        this.tone = tone ?? const Color(0x00000000),
-        this.label = label ?? 'Send Appreciation';
+  })  : action = action ?? '',
+        tone = tone ?? const Color(0x00000000),
+        label = label ?? 'Send Appreciation';
 
   final String action;
   final Color tone;
@@ -64,7 +61,7 @@ class _QuickActionWidgetState extends State<QuickActionWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -76,17 +73,17 @@ class _QuickActionWidgetState extends State<QuickActionWidget> {
                 height: 48.0,
                 decoration: BoxDecoration(
                   color: valueOrDefault<Color>(
-                    widget!.tone,
+                    widget.tone,
                     FlutterFlowTheme.of(context).primary,
                   ),
                   borderRadius: BorderRadius.circular(9999.0),
                   shape: BoxShape.rectangle,
                 ),
-                child: widget!.icon!,
+                child: widget.icon!,
               ),
               Text(
                 valueOrDefault<String>(
-                  widget!.label,
+                  widget.label,
                   'Send Appreciation',
                 ),
                 textAlign: TextAlign.center,
@@ -106,7 +103,7 @@ class _QuickActionWidgetState extends State<QuickActionWidget> {
                       lineHeight: 1.2,
                     ),
               ),
-            ].divide(SizedBox(height: 8.0)),
+            ].divide(const SizedBox(height: 8.0)),
           ),
         ),
       ),

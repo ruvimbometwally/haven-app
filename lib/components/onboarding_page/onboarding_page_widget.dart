@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding_page_model.dart';
 export 'onboarding_page_model.dart';
 
@@ -15,10 +12,10 @@ class OnboardingPageWidget extends StatefulWidget {
     String? imageDesc,
     String? title,
     String? subtitle,
-  })  : this.imageDesc = imageDesc ??
+  })  : imageDesc = imageDesc ??
             'https://dimg.dreamflow.cloud/v1/image/a%20cozy%20minimalist%20living%20room%20with%20warm%20sunlight%20and%20plants',
-        this.title = title ?? 'Welcome to your private relationship space.',
-        this.subtitle = subtitle ??
+        title = title ?? 'Welcome to your private relationship space.',
+        subtitle = subtitle ??
             'A digital home designed exclusively for the two of you.';
 
   final String imageDesc;
@@ -59,13 +56,13 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(40.0),
             bottomRight: Radius.circular(40.0),
           ),
           child: Container(
             height: 480.0,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(40.0),
                 bottomRight: Radius.circular(40.0),
@@ -73,19 +70,19 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget> {
               shape: BoxShape.rectangle,
             ),
             child: CachedNetworkImage(
-              fadeInDuration: Duration(milliseconds: 0),
-              fadeOutDuration: Duration(milliseconds: 0),
+              fadeInDuration: const Duration(milliseconds: 0),
+              fadeOutDuration: const Duration(milliseconds: 0),
               imageUrl: valueOrDefault<String>(
-                widget!.imageDesc,
+                widget.imageDesc,
                 'https://dimg.dreamflow.cloud/v1/image/a%20cozy%20minimalist%20living%20room%20with%20warm%20sunlight%20and%20plants',
               ),
               fit: BoxFit.cover,
-              alignment: Alignment(0.0, 0.0),
+              alignment: const Alignment(0.0, 0.0),
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -93,7 +90,7 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget> {
             children: [
               Text(
                 valueOrDefault<String>(
-                  widget!.title,
+                  widget.title,
                   'Welcome to your private relationship space.',
                 ),
                 textAlign: TextAlign.center,
@@ -114,7 +111,7 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget> {
               ),
               Text(
                 valueOrDefault<String>(
-                  widget!.subtitle,
+                  widget.subtitle,
                   'A digital home designed exclusively for the two of you.',
                 ),
                 textAlign: TextAlign.center,
@@ -134,10 +131,10 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget> {
                       lineHeight: 1.6,
                     ),
               ),
-            ].divide(SizedBox(height: 16.0)),
+            ].divide(const SizedBox(height: 16.0)),
           ),
         ),
-      ].divide(SizedBox(height: 32.0)),
+      ].divide(const SizedBox(height: 32.0)),
     );
   }
 }

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'agenda_card_model.dart';
 export 'agenda_card_model.dart';
 
@@ -16,10 +13,10 @@ class AgendaCardWidget extends StatefulWidget {
     String? title,
     String? time,
     String? category,
-  })  : this.tone = tone ?? const Color(0x00000000),
-        this.title = title ?? '',
-        this.time = time ?? '',
-        this.category = category ?? '';
+  })  : tone = tone ?? const Color(0x00000000),
+        title = title ?? '',
+        time = time ?? '',
+        category = category ?? '';
 
   final Color tone;
   final Widget? icon;
@@ -66,7 +63,7 @@ class _AgendaCardWidgetState extends State<AgendaCardWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Container(
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -78,13 +75,13 @@ class _AgendaCardWidgetState extends State<AgendaCardWidget> {
                 height: 48.0,
                 decoration: BoxDecoration(
                   color: valueOrDefault<Color>(
-                    widget!.tone,
-                    Color(0x00000000),
+                    widget.tone,
+                    const Color(0x00000000),
                   ),
                   borderRadius: BorderRadius.circular(16.0),
                   shape: BoxShape.rectangle,
                 ),
-                child: widget!.icon!,
+                child: widget.icon!,
               ),
               Expanded(
                 flex: 1,
@@ -99,7 +96,7 @@ class _AgendaCardWidgetState extends State<AgendaCardWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          widget!.title,
+                          widget.title,
                           style: FlutterFlowTheme.of(context)
                               .titleSmall
                               .override(
@@ -119,7 +116,7 @@ class _AgendaCardWidgetState extends State<AgendaCardWidget> {
                               ),
                         ),
                         Text(
-                          widget!.time,
+                          widget.time,
                           style: FlutterFlowTheme.of(context)
                               .labelSmall
                               .override(
@@ -146,7 +143,7 @@ class _AgendaCardWidgetState extends State<AgendaCardWidget> {
                       ],
                     ),
                     Text(
-                      widget!.category,
+                      widget.category,
                       style: FlutterFlowTheme.of(context).labelSmall.override(
                             font: GoogleFonts.outfit(
                               fontWeight: FontWeight.w600,
@@ -155,8 +152,8 @@ class _AgendaCardWidgetState extends State<AgendaCardWidget> {
                                   .fontStyle,
                             ),
                             color: valueOrDefault<Color>(
-                              widget!.tone,
-                              Color(0x00000000),
+                              widget.tone,
+                              const Color(0x00000000),
                             ),
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w600,
@@ -166,10 +163,10 @@ class _AgendaCardWidgetState extends State<AgendaCardWidget> {
                             lineHeight: 1.2,
                           ),
                     ),
-                  ].divide(SizedBox(height: 4.0)),
+                  ].divide(const SizedBox(height: 4.0)),
                 ),
               ),
-            ].divide(SizedBox(width: 16.0)),
+            ].divide(const SizedBox(width: 16.0)),
           ),
         ),
       ),

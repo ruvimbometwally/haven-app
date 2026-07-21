@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:math' as math;
 import '../auth/firebase_auth/auth_util.dart';
 
 import '../flutter_flow/flutter_flow_util.dart';
@@ -14,6 +15,7 @@ import 'schema/goals_record.dart';
 import 'schema/lists_record.dart';
 import 'schema/list_items_record.dart';
 import 'schema/users_record.dart';
+import 'schema/couples_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -31,6 +33,7 @@ export 'schema/goals_record.dart';
 export 'schema/lists_record.dart';
 export 'schema/list_items_record.dart';
 export 'schema/users_record.dart';
+export 'schema/couples_record.dart';
 
 /// Functions to query MessagesRecords (as a Stream and as a Future).
 Future<int> queryMessagesRecordCount({
@@ -365,6 +368,43 @@ Future<List<UsersRecord>> queryUsersRecordOnce({
       singleRecord: singleRecord,
     );
 
+/// Functions to query CouplesRecords (as a Stream and as a Future).
+Future<int> queryCouplesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CouplesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CouplesRecord>> queryCouplesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CouplesRecord.collection,
+      CouplesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CouplesRecord>> queryCouplesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CouplesRecord.collection,
+      CouplesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
 Future<int> queryCollectionCount(
   Query collection, {
   Query Function(Query)? queryBuilder,
@@ -484,7 +524,7 @@ Future<FFFirestorePage<T>> queryCollectionPage<T>(
   } else {
     docSnapshot = await query.get();
   }
-  final getDocs = (QuerySnapshot s) => s.docs
+  List<T> getDocs(QuerySnapshot s) => s.docs
       .map(
         (d) => safeGet(
           () => recordBuilder(d),
@@ -509,6 +549,12 @@ Future maybeCreateUser(User user) async {
     return;
   }
 
+  // Generate a unique invite code
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  final random = math.Random();
+  final inviteCode =
+      'OL-${Iterable.generate(6, (_) => chars[random.nextInt(chars.length)]).join()}';
+
   final userData = createUsersRecordData(
     email: user.email ??
         FirebaseAuth.instance.currentUser?.email ??
@@ -519,6 +565,7 @@ Future maybeCreateUser(User user) async {
     uid: user.uid,
     phoneNumber: user.phoneNumber,
     createdTime: getCurrentTimestamp,
+    inviteCode: inviteCode,
   );
 
   await userRecord.set(userData);

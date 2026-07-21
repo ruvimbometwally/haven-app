@@ -1,24 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
+import '/pages/create_account/create_account_widget.dart';
+import '/pages/login/login_widget.dart';
 
 const kTransitionInfoKey = '__transition_info__';
 
@@ -83,65 +77,90 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? HomeDashboardWidget()
-          : OnboardingEntryWidget(),
+          ? const OnboardingEntryWidget()
+          : const OnboardingEntryWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? HomeDashboardWidget()
-              : OnboardingEntryWidget(),
+              ? const OnboardingEntryWidget()
+              : const OnboardingEntryWidget(),
+        ),
+        FFRoute(
+          name: CreateAccountWidget.routeName,
+          path: CreateAccountWidget.routePath,
+          builder: (context, params) => const CreateAccountWidget(),
+        ),
+        FFRoute(
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
+          builder: (context, params) => const LoginWidget(),
         ),
         FFRoute(
           name: AppreciationJournalWidget.routeName,
           path: AppreciationJournalWidget.routePath,
-          builder: (context, params) => AppreciationJournalWidget(),
+          builder: (context, params) => const AppreciationJournalWidget(),
+          requireAuth: true,
         ),
         FFRoute(
           name: ConversationsWidget.routeName,
           path: ConversationsWidget.routePath,
-          builder: (context, params) => ConversationsWidget(),
+          builder: (context, params) => const ConversationsWidget(),
+          requireAuth: true,
         ),
         FFRoute(
           name: HomeDashboardWidget.routeName,
           path: HomeDashboardWidget.routePath,
-          builder: (context, params) => HomeDashboardWidget(),
+          builder: (context, params) => const HomeDashboardWidget(),
+          requireAuth: true,
         ),
         FFRoute(
           name: MemoriesScrapbookWidget.routeName,
           path: MemoriesScrapbookWidget.routePath,
-          builder: (context, params) => MemoriesScrapbookWidget(),
+          builder: (context, params) => const MemoriesScrapbookWidget(),
+          requireAuth: true,
         ),
         FFRoute(
           name: OnboardingEntryWidget.routeName,
           path: OnboardingEntryWidget.routePath,
-          builder: (context, params) => OnboardingEntryWidget(),
+          builder: (context, params) => const OnboardingEntryWidget(),
         ),
         FFRoute(
           name: PartnerConnectionWidget.routeName,
           path: PartnerConnectionWidget.routePath,
-          builder: (context, params) => PartnerConnectionWidget(),
+          builder: (context, params) => const PartnerConnectionWidget(),
+          requireAuth: true,
         ),
         FFRoute(
           name: PlanningListsWidget.routeName,
           path: PlanningListsWidget.routePath,
-          builder: (context, params) => PlanningListsWidget(),
+          builder: (context, params) => const PlanningListsWidget(),
+          requireAuth: true,
+        ),
+        FFRoute(
+          name: RelationshipSetupWidget.routeName,
+          path: RelationshipSetupWidget.routePath,
+          builder: (context, params) => const RelationshipSetupWidget(),
+          requireAuth: true,
         ),
         FFRoute(
           name: RelationshipProfileUsWidget.routeName,
           path: RelationshipProfileUsWidget.routePath,
-          builder: (context, params) => RelationshipProfileUsWidget(),
+          builder: (context, params) => const RelationshipProfileUsWidget(),
+          requireAuth: true,
         ),
         FFRoute(
           name: SettingsPrivacyWidget.routeName,
           path: SettingsPrivacyWidget.routePath,
-          builder: (context, params) => SettingsPrivacyWidget(),
+          builder: (context, params) => const SettingsPrivacyWidget(),
+          requireAuth: true,
         ),
         FFRoute(
           name: SharedCalendarWidget.routeName,
           path: SharedCalendarWidget.routePath,
-          builder: (context, params) => SharedCalendarWidget(),
+          builder: (context, params) => const SharedCalendarWidget(),
+          requireAuth: true,
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -326,7 +345,7 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
+              ? const Center(
                   child: SizedBox(
                     width: 50,
                     height: 50,
@@ -377,7 +396,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

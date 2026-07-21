@@ -1,15 +1,10 @@
 import '/components/button/button_widget.dart';
 import '/components/onboarding_page/onboarding_page_widget.dart';
 import '/components/progress_dots/progress_dots_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'onboarding_entry_widget.dart' show OnboardingEntryWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class OnboardingEntryModel extends FlutterFlowModel<OnboardingEntryWidget> {
   ///  State fields for stateful widgets in this page.

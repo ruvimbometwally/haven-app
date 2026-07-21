@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'settings_tile_model.dart';
 export 'settings_tile_model.dart';
 
@@ -17,11 +14,11 @@ class SettingsTileWidget extends StatefulWidget {
     String? label,
     String? value,
     bool? isLast,
-  })  : this.tapAction = tapAction ?? 'goBack',
-        this.iconColor = iconColor ?? const Color(0x00000000),
-        this.label = label ?? 'Partner Connection',
-        this.value = value ?? '',
-        this.isLast = isLast ?? false;
+  })  : tapAction = tapAction ?? 'goBack',
+        iconColor = iconColor ?? const Color(0x00000000),
+        label = label ?? 'Partner Connection',
+        value = value ?? '',
+        isLast = isLast ?? false;
 
   final String tapAction;
   final Widget? icon;
@@ -65,19 +62,19 @@ class _SettingsTileWidgetState extends State<SettingsTileWidget> {
       children: [
         Container(
           child: Padding(
-            padding: EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(24.0),
             child: Container(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  widget!.icon!,
+                  widget.icon!,
                   Expanded(
                     flex: 1,
                     child: Text(
                       valueOrDefault<String>(
-                        widget!.label,
+                        widget.label,
                         'Partner Connection',
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -107,7 +104,7 @@ class _SettingsTileWidgetState extends State<SettingsTileWidget> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        widget!.value,
+                        widget.value,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               font: GoogleFonts.outfit(
                                 fontWeight: FlutterFlowTheme.of(context)
@@ -133,16 +130,16 @@ class _SettingsTileWidgetState extends State<SettingsTileWidget> {
                         color: FlutterFlowTheme.of(context).alternate,
                         size: 20.0,
                       ),
-                    ].divide(SizedBox(width: 4.0)),
+                    ].divide(const SizedBox(width: 4.0)),
                   ),
-                ].divide(SizedBox(width: 16.0)),
+                ].divide(const SizedBox(width: 16.0)),
               ),
             ),
           ),
         ),
         if (valueOrDefault<bool>(
           valueOrDefault<bool>(
-            widget!.isLast,
+            widget.isLast,
             false,
           )
               ? false

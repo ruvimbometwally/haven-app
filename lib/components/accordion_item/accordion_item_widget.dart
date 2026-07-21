@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'accordion_item_model.dart';
 export 'accordion_item_model.dart';
 
@@ -15,10 +12,10 @@ class AccordionItemWidget extends StatefulWidget {
     String? content,
     bool? open,
     bool? last,
-  })  : this.title = title ?? 'Movie Wishlist',
-        this.content = content ?? 'Interstellar, Past Lives, About Time',
-        this.open = open ?? false,
-        this.last = last ?? false;
+  })  : title = title ?? 'Movie Wishlist',
+        content = content ?? 'Interstellar, Past Lives, About Time',
+        open = open ?? false,
+        last = last ?? false;
 
   final String title;
   final String content;
@@ -64,7 +61,7 @@ class _AccordionItemWidgetState extends State<AccordionItemWidget> {
             shape: BoxShape.rectangle,
           ),
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Container(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
@@ -75,7 +72,7 @@ class _AccordionItemWidgetState extends State<AccordionItemWidget> {
                     flex: 1,
                     child: Text(
                       valueOrDefault<String>(
-                        widget!.title,
+                        widget.title,
                         'Movie Wishlist',
                       ),
                       maxLines: 2,
@@ -98,15 +95,15 @@ class _AccordionItemWidgetState extends State<AccordionItemWidget> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: 20.0,
                     height: 20.0,
                     child: Stack(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       children: [
                         if (valueOrDefault<bool>(
                           valueOrDefault<bool>(
-                            widget!.open,
+                            widget.open,
                             false,
                           )
                               ? true
@@ -120,7 +117,7 @@ class _AccordionItemWidgetState extends State<AccordionItemWidget> {
                           ),
                         if (valueOrDefault<bool>(
                           valueOrDefault<bool>(
-                            widget!.open,
+                            widget.open,
                             false,
                           )
                               ? false
@@ -135,14 +132,14 @@ class _AccordionItemWidgetState extends State<AccordionItemWidget> {
                       ],
                     ),
                   ),
-                ].divide(SizedBox(width: 12.0)),
+                ].divide(const SizedBox(width: 12.0)),
               ),
             ),
           ),
         ),
         if (valueOrDefault<bool>(
           valueOrDefault<bool>(
-            widget!.open,
+            widget.open,
             false,
           )
               ? true
@@ -158,7 +155,7 @@ class _AccordionItemWidgetState extends State<AccordionItemWidget> {
           ),
         if (valueOrDefault<bool>(
           valueOrDefault<bool>(
-            widget!.open,
+            widget.open,
             false,
           )
               ? true
@@ -171,11 +168,11 @@ class _AccordionItemWidgetState extends State<AccordionItemWidget> {
               shape: BoxShape.rectangle,
             ),
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Container(
                 child: Text(
                   valueOrDefault<String>(
-                    widget!.content,
+                    widget.content,
                     'Interstellar, Past Lives, About Time',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -198,7 +195,7 @@ class _AccordionItemWidgetState extends State<AccordionItemWidget> {
           ),
         if (valueOrDefault<bool>(
           valueOrDefault<bool>(
-            widget!.last,
+            widget.last,
             false,
           )
               ? false

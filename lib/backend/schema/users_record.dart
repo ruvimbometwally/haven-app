@@ -10,9 +10,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class UsersRecord extends FirestoreRecord {
   UsersRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -71,6 +71,16 @@ class UsersRecord extends FirestoreRecord {
   String get partnerId => _partnerId ?? '';
   bool hasPartnerId() => _partnerId != null;
 
+  // "invite_code" field.
+  String? _inviteCode;
+  String get inviteCode => _inviteCode ?? '';
+  bool hasInviteCode() => _inviteCode != null;
+
+  // "couple_ref" field.
+  DocumentReference? _coupleRef;
+  DocumentReference? get coupleRef => _coupleRef;
+  bool hasCoupleRef() => _coupleRef != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -83,6 +93,8 @@ class UsersRecord extends FirestoreRecord {
     _mood = snapshotData['mood'] as String?;
     _loveLanguages = getDataList(snapshotData['loveLanguages']);
     _partnerId = snapshotData['partnerId'] as String?;
+    _inviteCode = snapshotData['invite_code'] as String?;
+    _coupleRef = snapshotData['couple_ref'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -129,6 +141,8 @@ Map<String, dynamic> createUsersRecordData({
   String? avatar,
   String? mood,
   String? partnerId,
+  String? inviteCode,
+  DocumentReference? coupleRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -142,6 +156,8 @@ Map<String, dynamic> createUsersRecordData({
       'avatar': avatar,
       'mood': mood,
       'partnerId': partnerId,
+      'invite_code': inviteCode,
+      'couple_ref': coupleRef,
     }.withoutNulls,
   );
 
@@ -164,7 +180,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.avatar == e2?.avatar &&
         e1?.mood == e2?.mood &&
         listEquality.equals(e1?.loveLanguages, e2?.loveLanguages) &&
-        e1?.partnerId == e2?.partnerId;
+        e1?.partnerId == e2?.partnerId &&
+        e1?.inviteCode == e2?.inviteCode &&
+        e1?.coupleRef == e2?.coupleRef;
   }
 
   @override
@@ -179,7 +197,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.avatar,
         e?.mood,
         e?.loveLanguages,
-        e?.partnerId
+        e?.partnerId,
+        e?.inviteCode,
+        e?.coupleRef
       ]);
 
   @override

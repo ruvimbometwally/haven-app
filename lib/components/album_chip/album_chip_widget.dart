@@ -1,9 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'album_chip_model.dart';
 export 'album_chip_model.dart';
 
@@ -12,8 +10,8 @@ class AlbumChipWidget extends StatefulWidget {
     super.key,
     bool? active,
     String? label,
-  })  : this.active = active ?? false,
-        this.label = label ?? 'All Memories';
+  })  : active = active ?? false,
+        label = label ?? 'All Memories';
 
   final bool active;
   final String label;
@@ -50,7 +48,7 @@ class _AlbumChipWidgetState extends State<AlbumChipWidget> {
       decoration: BoxDecoration(
         color: valueOrDefault<Color>(
           valueOrDefault<bool>(
-            widget!.active,
+            widget.active,
             false,
           )
               ? FlutterFlowTheme.of(context).tertiary
@@ -62,7 +60,7 @@ class _AlbumChipWidgetState extends State<AlbumChipWidget> {
         border: Border.all(
           color: valueOrDefault<Color>(
             valueOrDefault<bool>(
-              widget!.active,
+              widget.active,
               false,
             )
                 ? FlutterFlowTheme.of(context).tertiary
@@ -73,11 +71,11 @@ class _AlbumChipWidgetState extends State<AlbumChipWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(8.0, 16.0, 8.0, 16.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(8.0, 16.0, 8.0, 16.0),
         child: Container(
           child: Text(
             valueOrDefault<String>(
-              widget!.label,
+              widget.label,
               'All Memories',
             ),
             style: FlutterFlowTheme.of(context).labelLarge.override(
@@ -89,7 +87,7 @@ class _AlbumChipWidgetState extends State<AlbumChipWidget> {
                   ),
                   color: valueOrDefault<Color>(
                     valueOrDefault<bool>(
-                      widget!.active,
+                      widget.active,
                       false,
                     )
                         ? FlutterFlowTheme.of(context).onPrimary

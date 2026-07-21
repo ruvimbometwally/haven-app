@@ -5,6 +5,10 @@ export '/pages/conversations/conversations_widget.dart'
     show ConversationsWidget;
 export '/pages/home_dashboard/home_dashboard_widget.dart'
     show HomeDashboardWidget;
+export '/pages/login/login_widget.dart'
+    show LoginWidget;
+export '/pages/create_account/create_account_widget.dart'
+    show CreateAccountWidget;
 export '/pages/memories_scrapbook/memories_scrapbook_widget.dart'
     show MemoriesScrapbookWidget;
 export '/pages/onboarding_entry/onboarding_entry_widget.dart'
@@ -13,9 +17,13 @@ export '/pages/partner_connection/partner_connection_widget.dart'
     show PartnerConnectionWidget;
 export '/pages/planning_lists/planning_lists_widget.dart'
     show PlanningListsWidget;
+export '/pages/relationship_setup/relationship_setup_widget.dart'
+    show RelationshipSetupWidget;
 export '/pages/relationship_profile_us/relationship_profile_us_widget.dart'
     show RelationshipProfileUsWidget;
 export '/pages/settings_privacy/settings_privacy_widget.dart'
     show SettingsPrivacyWidget;
 export '/pages/shared_calendar/shared_calendar_widget.dart'
     show SharedCalendarWidget;
+export '/components/side_nav/side_nav_widget.dart'
+    show SideNavWidget;

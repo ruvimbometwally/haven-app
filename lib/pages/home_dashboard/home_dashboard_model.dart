@@ -1,18 +1,10 @@
 import '/components/bottom_nav3/bottom_nav3_widget.dart';
 import '/components/button/button_widget.dart';
 import '/components/quick_action/quick_action_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'home_dashboard_widget.dart' show HomeDashboardWidget;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import 'package:provider/provider.dart';
 
 class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
   ///  State fields for stateful widgets in this page.

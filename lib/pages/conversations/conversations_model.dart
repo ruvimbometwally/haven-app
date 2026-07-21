@@ -2,17 +2,10 @@ import '/components/bottom_nav2/bottom_nav2_widget.dart';
 import '/components/chat_bubble/chat_bubble_widget.dart';
 import '/components/text_field/text_field_widget.dart';
 import '/components/voice_note/voice_note_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'conversations_widget.dart' show ConversationsWidget;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class ConversationsModel extends FlutterFlowModel<ConversationsWidget> {
   ///  State fields for stateful widgets in this page.

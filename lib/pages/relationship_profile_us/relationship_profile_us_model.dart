@@ -4,17 +4,10 @@ import '/components/button/button_widget.dart';
 import '/components/goal_progress/goal_progress_widget.dart';
 import '/components/info_tile/info_tile_widget.dart';
 import '/components/profile_header/profile_header_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'relationship_profile_us_widget.dart' show RelationshipProfileUsWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class RelationshipProfileUsModel
     extends FlutterFlowModel<RelationshipProfileUsWidget> {

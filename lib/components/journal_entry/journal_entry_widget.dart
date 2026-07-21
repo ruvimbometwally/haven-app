@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'journal_entry_model.dart';
 export 'journal_entry_model.dart';
 
@@ -15,9 +12,9 @@ class JournalEntryWidget extends StatefulWidget {
     this.moodIcon,
     String? title,
     String? excerpt,
-  })  : this.date = date ?? '',
-        this.title = title ?? '',
-        this.excerpt = excerpt ?? '';
+  })  : date = date ?? '',
+        title = title ?? '',
+        excerpt = excerpt ?? '';
 
   final String date;
   final Widget? moodIcon;
@@ -63,7 +60,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -78,7 +75,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                   Flexible(
                     flex: 1,
                     child: Text(
-                      widget!.date,
+                      widget.date,
                       maxLines: 1,
                       style: FlutterFlowTheme.of(context).labelSmall.override(
                             font: GoogleFonts.outfit(
@@ -102,11 +99,11 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  widget!.moodIcon!,
+                  widget.moodIcon!,
                 ],
               ),
               Text(
-                widget!.title,
+                widget.title,
                 style: FlutterFlowTheme.of(context).titleMedium.override(
                       font: GoogleFonts.plusJakartaSans(
                         fontWeight: FontWeight.bold,
@@ -122,7 +119,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                     ),
               ),
               Text(
-                widget!.excerpt,
+                widget.excerpt,
                 maxLines: 2,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       font: GoogleFonts.outfit(
@@ -141,7 +138,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                     ),
                 overflow: TextOverflow.ellipsis,
               ),
-            ].divide(SizedBox(height: 8.0)),
+            ].divide(const SizedBox(height: 8.0)),
           ),
         ),
       ),

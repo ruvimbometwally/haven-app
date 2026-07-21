@@ -1,11 +1,8 @@
 import '/components/switch_component/switch_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'settings_group3_model.dart';
 export 'settings_group3_model.dart';
 
@@ -13,7 +10,7 @@ class SettingsGroup3Widget extends StatefulWidget {
   const SettingsGroup3Widget({
     super.key,
     String? title,
-  }) : this.title = title ?? 'NOTIFICATIONS';
+  }) : title = title ?? 'NOTIFICATIONS';
 
   final String title;
 
@@ -51,11 +48,11 @@ class _SettingsGroup3WidgetState extends State<SettingsGroup3Widget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
           child: Container(
             child: Text(
               valueOrDefault<String>(
-                widget!.title,
+                widget.title,
                 'NOTIFICATIONS',
               ),
               style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -100,12 +97,12 @@ class _SettingsGroup3WidgetState extends State<SettingsGroup3Widget> {
                   children: [
                     Container(
                       child: Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Container(
                           child: wrapWithModel(
                             model: _model.switchModel1,
                             updateCallback: () => safeSetState(() {}),
-                            child: SwitchComponentWidget(
+                            child: const SwitchComponentWidget(
                               label: 'Daily Relationship Prompts',
                               labelPresent: true,
                               variant: 'Android',
@@ -124,12 +121,12 @@ class _SettingsGroup3WidgetState extends State<SettingsGroup3Widget> {
                     ),
                     Container(
                       child: Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Container(
                           child: wrapWithModel(
                             model: _model.switchModel2,
                             updateCallback: () => safeSetState(() {}),
-                            child: SwitchComponentWidget(
+                            child: const SwitchComponentWidget(
                               label: 'Partner Mood Updates',
                               labelPresent: true,
                               variant: 'Android',
@@ -148,12 +145,12 @@ class _SettingsGroup3WidgetState extends State<SettingsGroup3Widget> {
                     ),
                     Container(
                       child: Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Container(
                           child: wrapWithModel(
                             model: _model.switchModel3,
                             updateCallback: () => safeSetState(() {}),
-                            child: SwitchComponentWidget(
+                            child: const SwitchComponentWidget(
                               label: 'Shared Calendar Alerts',
                               labelPresent: true,
                               variant: 'Android',
@@ -169,7 +166,7 @@ class _SettingsGroup3WidgetState extends State<SettingsGroup3Widget> {
             ),
           ),
         ),
-      ].divide(SizedBox(height: 16.0)),
+      ].divide(const SizedBox(height: 16.0)),
     );
   }
 }

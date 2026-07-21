@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'nav_item_model.dart';
 export 'nav_item_model.dart';
 
@@ -15,9 +12,9 @@ class NavItemWidget extends StatefulWidget {
     this.icon,
     String? target,
     bool? selected,
-  })  : this.label = label ?? 'Home',
-        this.target = target ?? 'HomeDashboard',
-        this.selected = selected ?? false;
+  })  : label = label ?? 'Home',
+        target = target ?? 'HomeDashboard',
+        selected = selected ?? false;
 
   final String label;
   final Widget? icon;
@@ -53,16 +50,16 @@ class _NavItemWidgetState extends State<NavItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          widget!.icon!,
+          widget.icon!,
           Text(
             valueOrDefault<String>(
-              widget!.label,
+              widget.label,
               'Home',
             ),
             style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -74,7 +71,7 @@ class _NavItemWidgetState extends State<NavItemWidget> {
                   ),
                   color: valueOrDefault<Color>(
                     valueOrDefault<bool>(
-                      widget!.selected,
+                      widget.selected,
                       false,
                     )
                         ? FlutterFlowTheme.of(context).primary
@@ -88,7 +85,7 @@ class _NavItemWidgetState extends State<NavItemWidget> {
                   lineHeight: 1.6,
                 ),
           ),
-        ].divide(SizedBox(height: 2.0)),
+        ].divide(const SizedBox(height: 2.0)),
       ),
     );
   }

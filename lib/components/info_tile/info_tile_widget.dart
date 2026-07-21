@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'info_tile_model.dart';
 export 'info_tile_model.dart';
 
@@ -15,9 +12,9 @@ class InfoTileWidget extends StatefulWidget {
     this.icon,
     String? label,
     String? value,
-  })  : this.tint = tint ?? const Color(0x00000000),
-        this.label = label ?? 'Love Languages',
-        this.value = value ?? 'Quality Time & Words of Affirmation';
+  })  : tint = tint ?? const Color(0x00000000),
+        label = label ?? 'Love Languages',
+        value = value ?? 'Quality Time & Words of Affirmation';
 
   final Color tint;
   final Widget? icon;
@@ -63,7 +60,7 @@ class _InfoTileWidgetState extends State<InfoTileWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Container(
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -75,13 +72,13 @@ class _InfoTileWidgetState extends State<InfoTileWidget> {
                 height: 40.0,
                 decoration: BoxDecoration(
                   color: valueOrDefault<Color>(
-                    widget!.tint,
+                    widget.tint,
                     FlutterFlowTheme.of(context).primary,
                   ),
                   borderRadius: BorderRadius.circular(16.0),
                   shape: BoxShape.rectangle,
                 ),
-                child: widget!.icon!,
+                child: widget.icon!,
               ),
               Expanded(
                 flex: 1,
@@ -92,7 +89,7 @@ class _InfoTileWidgetState extends State<InfoTileWidget> {
                   children: [
                     Text(
                       valueOrDefault<String>(
-                        widget!.label,
+                        widget.label,
                         'Love Languages',
                       ),
                       style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -117,7 +114,7 @@ class _InfoTileWidgetState extends State<InfoTileWidget> {
                     ),
                     Text(
                       valueOrDefault<String>(
-                        widget!.value,
+                        widget.value,
                         'Quality Time & Words of Affirmation',
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -136,7 +133,7 @@ class _InfoTileWidgetState extends State<InfoTileWidget> {
                             lineHeight: 1.6,
                           ),
                     ),
-                  ].divide(SizedBox(height: 4.0)),
+                  ].divide(const SizedBox(height: 4.0)),
                 ),
               ),
               Icon(
@@ -144,7 +141,7 @@ class _InfoTileWidgetState extends State<InfoTileWidget> {
                 color: FlutterFlowTheme.of(context).secondaryText40,
                 size: 20.0,
               ),
-            ].divide(SizedBox(width: 16.0)),
+            ].divide(const SizedBox(width: 16.0)),
           ),
         ),
       ),

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'note_item_model.dart';
 export 'note_item_model.dart';
 
@@ -15,10 +12,10 @@ class NoteItemWidget extends StatefulWidget {
     String? title,
     String? author,
     String? date,
-  })  : this.tapAction = tapAction ?? '',
-        this.title = title ?? '',
-        this.author = author ?? '',
-        this.date = date ?? '';
+  })  : tapAction = tapAction ?? '',
+        title = title ?? '',
+        author = author ?? '',
+        date = date ?? '';
 
   final String tapAction;
   final String title;
@@ -59,12 +56,12 @@ class _NoteItemWidgetState extends State<NoteItemWidget> {
         borderRadius: BorderRadius.circular(24.0),
         shape: BoxShape.rectangle,
         border: Border.all(
-          color: Color(0xFFE5D8C5),
+          color: const Color(0xFFE5D8C5),
           width: 1.0,
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -72,7 +69,7 @@ class _NoteItemWidgetState extends State<NoteItemWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                widget!.title,
+                widget.title,
                 maxLines: 2,
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
                       font: GoogleFonts.outfit(
@@ -95,7 +92,7 @@ class _NoteItemWidgetState extends State<NoteItemWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    widget!.author,
+                    widget.author,
                     style: FlutterFlowTheme.of(context).labelSmall.override(
                           font: GoogleFonts.outfit(
                             fontWeight: FlutterFlowTheme.of(context)
@@ -116,7 +113,7 @@ class _NoteItemWidgetState extends State<NoteItemWidget> {
                         ),
                   ),
                   Text(
-                    widget!.date,
+                    widget.date,
                     style: FlutterFlowTheme.of(context).labelSmall.override(
                           font: GoogleFonts.outfit(
                             fontWeight: FlutterFlowTheme.of(context)
@@ -138,7 +135,7 @@ class _NoteItemWidgetState extends State<NoteItemWidget> {
                   ),
                 ],
               ),
-            ].divide(SizedBox(height: 8.0)),
+            ].divide(const SizedBox(height: 8.0)),
           ),
         ),
       ),

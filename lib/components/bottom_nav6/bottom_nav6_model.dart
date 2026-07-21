@@ -1,12 +1,7 @@
 import '/components/nav_item/nav_item_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'bottom_nav6_widget.dart' show BottomNav6Widget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class BottomNav6Model extends FlutterFlowModel<BottomNav6Widget> {
   ///  State fields for stateful widgets in this component.

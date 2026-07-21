@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'list_category_model.dart';
 export 'list_category_model.dart';
 
@@ -16,10 +13,10 @@ class ListCategoryWidget extends StatefulWidget {
     this.icon,
     String? title,
     String? count,
-  })  : this.tapAction = tapAction ?? '',
-        this.tone = tone ?? const Color(0xFF8DAA91),
-        this.title = title ?? 'Grocery List',
-        this.count = count ?? '';
+  })  : tapAction = tapAction ?? '',
+        tone = tone ?? const Color(0xFF8DAA91),
+        title = title ?? 'Grocery List',
+        count = count ?? '';
 
   final String tapAction;
   final Color tone;
@@ -66,7 +63,7 @@ class _ListCategoryWidgetState extends State<ListCategoryWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Container(
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -78,13 +75,13 @@ class _ListCategoryWidgetState extends State<ListCategoryWidget> {
                 height: 48.0,
                 decoration: BoxDecoration(
                   color: valueOrDefault<Color>(
-                    widget!.tone,
-                    Color(0xFF8DAA91),
+                    widget.tone,
+                    const Color(0xFF8DAA91),
                   ),
                   borderRadius: BorderRadius.circular(16.0),
                   shape: BoxShape.rectangle,
                 ),
-                child: widget!.icon!,
+                child: widget.icon!,
               ),
               Expanded(
                 flex: 1,
@@ -95,7 +92,7 @@ class _ListCategoryWidgetState extends State<ListCategoryWidget> {
                   children: [
                     Text(
                       valueOrDefault<String>(
-                        widget!.title,
+                        widget.title,
                         'Grocery List',
                       ),
                       style: FlutterFlowTheme.of(context).titleMedium.override(
@@ -116,7 +113,7 @@ class _ListCategoryWidgetState extends State<ListCategoryWidget> {
                     ),
                     Text(
                       valueOrDefault<String>(
-                        '${widget!.count} items',
+                        '${widget.count} items',
                         ' items',
                       ),
                       style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -139,7 +136,7 @@ class _ListCategoryWidgetState extends State<ListCategoryWidget> {
                             lineHeight: 1.2,
                           ),
                     ),
-                  ].divide(SizedBox(height: 4.0)),
+                  ].divide(const SizedBox(height: 4.0)),
                 ),
               ),
               Icon(
@@ -147,7 +144,7 @@ class _ListCategoryWidgetState extends State<ListCategoryWidget> {
                 color: FlutterFlowTheme.of(context).secondaryText,
                 size: 20.0,
               ),
-            ].divide(SizedBox(width: 16.0)),
+            ].divide(const SizedBox(width: 16.0)),
           ),
         ),
       ),
