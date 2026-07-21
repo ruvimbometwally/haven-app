@@ -46,6 +46,11 @@ class CouplesRecord extends FirestoreRecord {
   List<DocumentReference> get userRefs => _userRefs ?? const [];
   bool hasUserRefs() => _userRefs != null;
 
+  // "important_dates" field.
+  List<dynamic>? _importantDates;
+  List<dynamic> get importantDates => _importantDates ?? const [];
+  bool hasImportantDates() => _importantDates != null;
+
   void _initializeFields() {
     _relationshipStartDate =
         snapshotData['relationship_start_date'] is DateTime
@@ -56,6 +61,7 @@ class CouplesRecord extends FirestoreRecord {
     _primaryGoals = getDataList(snapshotData['primary_goals']);
     _createdAt = snapshotData['created_at'] as DateTime?;
     _userRefs = getDataList(snapshotData['user_refs']);
+    _importantDates = snapshotData['important_dates'] as List<dynamic>?;
   }
 
   static CollectionReference get collection =>
@@ -120,7 +126,8 @@ class CouplesRecordDocumentEquality implements Equality<CouplesRecord> {
         e1?.anniversaryDate == e2?.anniversaryDate &&
         listEquality.equals(e1?.primaryGoals, e2?.primaryGoals) &&
         e1?.createdAt == e2?.createdAt &&
-        listEquality.equals(e1?.userRefs, e2?.userRefs);
+        listEquality.equals(e1?.userRefs, e2?.userRefs) &&
+        listEquality.equals(e1?.importantDates, e2?.importantDates);
   }
 
   @override
@@ -130,7 +137,8 @@ class CouplesRecordDocumentEquality implements Equality<CouplesRecord> {
         e?.anniversaryDate,
         e?.primaryGoals,
         e?.createdAt,
-        e?.userRefs
+        e?.userRefs,
+        e?.importantDates
       ]);
 
   @override

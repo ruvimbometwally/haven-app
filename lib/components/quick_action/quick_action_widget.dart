@@ -12,6 +12,7 @@ class QuickActionWidget extends StatefulWidget {
     Color? tone,
     this.icon,
     String? label,
+    this.onTap,
   })  : action = action ?? '',
         tone = tone ?? const Color(0x00000000),
         label = label ?? 'Send Appreciation';
@@ -20,6 +21,7 @@ class QuickActionWidget extends StatefulWidget {
   final Color tone;
   final Widget? icon;
   final String label;
+  final Future Function()? onTap;
 
   @override
   State<QuickActionWidget> createState() => _QuickActionWidgetState();
@@ -49,61 +51,73 @@ class _QuickActionWidgetState extends State<QuickActionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100.0,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: BorderRadius.circular(24.0),
-        shape: BoxShape.rectangle,
-        border: Border.all(
-          color: FlutterFlowTheme.of(context).alternate,
-          width: 1.0,
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () async {
+        if (widget.onTap != null) {
+          await widget.onTap!();
+        }
+      },
+      child: Container(
+        width: 100.0,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          borderRadius: BorderRadius.circular(24.0),
+          shape: BoxShape.rectangle,
+          border: Border.all(
+            color: FlutterFlowTheme.of(context).alternate,
+            width: 1.0,
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 48.0,
-                height: 48.0,
-                decoration: BoxDecoration(
-                  color: valueOrDefault<Color>(
-                    widget.tone,
-                    FlutterFlowTheme.of(context).primary,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 48.0,
+                  height: 48.0,
+                  decoration: BoxDecoration(
+                    color: valueOrDefault<Color>(
+                      widget.tone,
+                      FlutterFlowTheme.of(context).primary,
+                    ),
+                    borderRadius: BorderRadius.circular(9999.0),
+                    shape: BoxShape.rectangle,
                   ),
-                  borderRadius: BorderRadius.circular(9999.0),
-                  shape: BoxShape.rectangle,
+                  child: widget.icon!,
                 ),
-                child: widget.icon!,
-              ),
-              Text(
-                valueOrDefault<String>(
-                  widget.label,
-                  'Send Appreciation',
-                ),
-                textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).labelSmall.override(
-                      font: GoogleFonts.outfit(
+                Text(
+                  valueOrDefault<String>(
+                    widget.label,
+                    'Send Appreciation',
+                  ),
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).labelSmall.override(
+                        font: GoogleFonts.outfit(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
+                        ),
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        letterSpacing: 0.0,
                         fontWeight:
                             FlutterFlowTheme.of(context).labelSmall.fontWeight,
                         fontStyle:
                             FlutterFlowTheme.of(context).labelSmall.fontStyle,
+                        lineHeight: 1.2,
                       ),
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      letterSpacing: 0.0,
-                      fontWeight:
-                          FlutterFlowTheme.of(context).labelSmall.fontWeight,
-                      fontStyle:
-                          FlutterFlowTheme.of(context).labelSmall.fontStyle,
-                      lineHeight: 1.2,
-                    ),
-              ),
-            ].divide(const SizedBox(height: 8.0)),
+                ),
+              ].divide(const SizedBox(height: 8.0)),
+            ),
           ),
         ),
       ),

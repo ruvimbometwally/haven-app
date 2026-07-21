@@ -74,7 +74,7 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget> {
               fadeOutDuration: const Duration(milliseconds: 0),
               imageUrl: valueOrDefault<String>(
                 widget.imageDesc,
-                'https://dimg.dreamflow.cloud/v1/image/a%20cozy%20minimalist%20living%20room%20with%20warm%20sunlight%20and%20plants',
+                'https://firebasestorage.googleapis.com/v0/b/haven-ut6jze.firebasestorage.app/o/onBoarding_page.png?alt=media&token=31b6851f-185d-4404-94c8-2b72cdb9b524',
               ),
               fit: BoxFit.cover,
               alignment: const Alignment(0.0, 0.0),

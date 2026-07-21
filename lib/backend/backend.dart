@@ -16,6 +16,7 @@ import 'schema/lists_record.dart';
 import 'schema/list_items_record.dart';
 import 'schema/users_record.dart';
 import 'schema/couples_record.dart';
+import 'schema/prompt_responses_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -34,6 +35,7 @@ export 'schema/lists_record.dart';
 export 'schema/list_items_record.dart';
 export 'schema/users_record.dart';
 export 'schema/couples_record.dart';
+export 'schema/prompt_responses_record.dart';
 
 /// Functions to query MessagesRecords (as a Stream and as a Future).
 Future<int> queryMessagesRecordCount({
@@ -400,6 +402,43 @@ Future<List<CouplesRecord>> queryCouplesRecordOnce({
     queryCollectionOnce(
       CouplesRecord.collection,
       CouplesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query PromptResponsesRecords (as a Stream and as a Future).
+Future<int> queryPromptResponsesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      PromptResponsesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<PromptResponsesRecord>> queryPromptResponsesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      PromptResponsesRecord.collection,
+      PromptResponsesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<PromptResponsesRecord>> queryPromptResponsesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      PromptResponsesRecord.collection,
+      PromptResponsesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

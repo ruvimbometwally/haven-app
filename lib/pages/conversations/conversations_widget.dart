@@ -126,7 +126,7 @@ class _ConversationsWidgetState extends State<ConversationsWidget> {
                                     fadeOutDuration:
                                         const Duration(milliseconds: 0),
                                     imageUrl:
-                                        'https://dimg.dreamflow.cloud/v1/image/Portrait%20of%20Sarah%20smiling%20softly',
+                                        'https://firebasestorage.googleapis.com/v0/b/haven-ut6jze.firebasestorage.app/o/conversation_page.jpeg?alt=media&token=caf41bcb-9a95-4994-ba8c-61dac012e3cd',
                                     fit: BoxFit.cover,
                                     alignment: const Alignment(0.0, 0.0),
                                   ),

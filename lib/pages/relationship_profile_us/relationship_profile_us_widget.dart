@@ -1,3 +1,6 @@
+import '../../auth/firebase_auth/auth_util.dart';
+import '../../backend/schema/couples_record.dart';
+import '../../backend/schema/users_record.dart';
 import '/components/accordion_item/accordion_item_widget.dart';
 import '/components/bottom_nav6/bottom_nav6_widget.dart';
 import '/components/button/button_widget.dart';
@@ -65,463 +68,590 @@ class _RelationshipProfileUsWidgetState
         ),
         body: SafeArea(
           top: false,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    24.0, 24.0, 24.0, 16.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderRadius: 8.0,
-                          buttonSize: 40.0,
-                          fillColor: Colors.transparent,
-                          icon: Icon(
-                            Icons.menu_rounded,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            scaffoldKey.currentState!.openDrawer();
-                          },
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text(
-                          'Relationship Profile',
-                          style: FlutterFlowTheme.of(context).headlineSmall,
-                        ),
-                      ],
-                    ),
-                    FlutterFlowIconButton(
-                      borderRadius: 8.0,
-                      buttonSize: 40.0,
-                      fillColor: Colors.transparent,
-                      icon: Icon(
-                        Icons.settings_rounded,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        context.goNamed(SettingsPrivacyWidget.routeName);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  primary: false,
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        wrapWithModel(
-                          model: _model.profileHeaderModel,
-                          updateCallback: () => safeSetState(() {}),
-                          child: ProfileHeaderWidget(
-                            imageDesc:
-                                'https://dimg.dreamflow.cloud/v1/image/Couple%20laughing%20together%20in%20a%20garden',
-                            names: 'Sarah & Alex',
-                            duration: functions.relationshipDurationLabel(),
-                          ),
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 4.0),
-                              child: Text(
-                                'The Essentials',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      font: GoogleFonts.plusJakartaSans(
-                                        fontWeight:
-                                            FlutterFlowTheme.of(context)
-                                                .titleSmall
-                                                .fontWeight,
-                                        fontStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .titleSmall
-                                                .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      letterSpacing: 0.0,
-                                      fontWeight:
-                                          FlutterFlowTheme.of(context)
-                                              .titleSmall
-                                              .fontWeight,
-                                      fontStyle:
-                                          FlutterFlowTheme.of(context)
-                                              .titleSmall
-                                              .fontStyle,
-                                      lineHeight: 1.4,
-                                    ),
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.infoTileModel1,
-                              updateCallback: () => safeSetState(() {}),
-                              child: InfoTileWidget(
-                                tint: const Color(0x00000000),
-                                icon: Icon(
-                                  Icons.favorite_rounded,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 20.0,
-                                ),
-                                label: 'Love Languages',
-                                value: 'Quality Time & Words of Affirmation',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.infoTileModel2,
-                              updateCallback: () => safeSetState(() {}),
-                              child: InfoTileWidget(
-                                tint: const Color(0x00000000),
-                                icon: Icon(
-                                  Icons.auto_awesome_rounded,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 20.0,
-                                ),
-                                label: 'Shared Bucket List',
-                                value: '12 items remaining',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.infoTileModel3,
-                              updateCallback: () => safeSetState(() {}),
-                              child: InfoTileWidget(
-                                tint: FlutterFlowTheme.of(context).tertiary,
-                                icon: Icon(
-                                  Icons.psychology_rounded,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 20.0,
-                                ),
-                                label: 'Attachment Styles',
-                                value: 'Secure & Anxious-Preoccupied',
-                              ),
-                            ),
-                          ].divide(const SizedBox(height: 16.0)),
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
+          child: AuthUserStreamWidget(
+            builder: (context) {
+              if (currentUserDocument == null) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final coupleRef = currentUserDocument!.coupleRef;
+              final partnerId = currentUserDocument!.partnerId;
+
+              return StreamBuilder<CouplesRecord>(
+                stream: coupleRef != null
+                    ? CouplesRecord.getDocument(coupleRef)
+                    : const Stream.empty(),
+                builder: (context, coupleSnapshot) {
+                  final coupleData = coupleSnapshot.data;
+
+                  return StreamBuilder<UsersRecord>(
+                    stream: partnerId.isNotEmpty
+                        ? UsersRecord.getDocument(
+                            UsersRecord.collection.doc(partnerId))
+                        : const Stream.empty(),
+                    builder: (context, partnerSnapshot) {
+                      final partnerData = partnerSnapshot.data;
+                      final partnerName = partnerData?.displayName ?? 'Partner';
+                      final relationshipDuration = functions
+                          .relationshipDurationLabel(
+                              coupleData?.relationshipStartDate);
+
+                      return Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 24.0, 24.0, 16.0),
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Shared Goals',
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleMedium
-                                      .override(
-                                        font: GoogleFonts.plusJakartaSans(
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .fontStyle,
-                                        ),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .fontStyle,
-                                        lineHeight: 1.4,
-                                      ),
-                                ),
-                                Text(
-                                  'View All',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .override(
-                                        font: GoogleFonts.outfit(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontStyle,
-                                        ),
-                                        letterSpacing: 0.0,
-                                        fontWeight:
-                                            FlutterFlowTheme.of(context)
-                                                .labelLarge
-                                                .fontWeight,
-                                        fontStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .labelLarge
-                                                .fontStyle,
-                                        lineHeight: 1.3,
-                                      ),
-                                ),
-                              ],
-                            ),
-                            wrapWithModel(
-                              model: _model.goalProgressModel1,
-                              updateCallback: () => safeSetState(() {}),
-                              child: const GoalProgressWidget(
-                                title: 'Vacation Savings',
-                                deadline: 'Due in 3 months',
-                                progress: 0.75,
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.goalProgressModel2,
-                              updateCallback: () => safeSetState(() {}),
-                              child: const GoalProgressWidget(
-                                title: 'Monthly Date Night',
-                                deadline: 'Completed',
-                                progress: 1.0,
-                              ),
-                            ),
-                          ].divide(const SizedBox(height: 16.0)),
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Our Lists',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    font: GoogleFonts.plusJakartaSans(
-                                      fontWeight:
-                                          FlutterFlowTheme.of(context)
-                                              .titleSmall
-                                              .fontWeight,
-                                      fontStyle:
-                                          FlutterFlowTheme.of(context)
-                                              .titleSmall
-                                              .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                    lineHeight: 1.4,
-                                  ),
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(24.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(24.0),
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    color: FlutterFlowTheme.of(context)
-                                        .alternate,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.start,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    wrapWithModel(
-                                      model: _model.accordionItemModel1,
-                                      updateCallback: () =>
-                                          safeSetState(() {}),
-                                      child: const AccordionItemWidget(
-                                        title: 'Movie Wishlist',
-                                        content:
-                                            'Interstellar, Past Lives, About Time',
-                                        open: false,
-                                        last: false,
+                                    FlutterFlowIconButton(
+                                      borderRadius: 8.0,
+                                      buttonSize: 40.0,
+                                      fillColor: Colors.transparent,
+                                      icon: Icon(
+                                        Icons.menu_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
                                       ),
+                                      onPressed: () async {
+                                        scaffoldKey.currentState!.openDrawer();
+                                      },
                                     ),
-                                    wrapWithModel(
-                                      model: _model.accordionItemModel2,
-                                      updateCallback: () =>
-                                          safeSetState(() {}),
-                                      child: const AccordionItemWidget(
-                                        title: 'Restaurant Wishlist',
-                                        content:
-                                            'Le Petit Bistro, Sushi Zen, The Garden Cafe',
-                                        open: false,
-                                        last: false,
-                                      ),
-                                    ),
-                                    wrapWithModel(
-                                      model: _model.accordionItemModel3,
-                                      updateCallback: () =>
-                                          safeSetState(() {}),
-                                      child: const AccordionItemWidget(
-                                        title: 'Gift Ideas',
-                                        content:
-                                            'New Espresso Machine, Weekend Spa Trip',
-                                        open: true,
-                                        last: true,
-                                      ),
+                                    const SizedBox(width: 8.0),
+                                    Text(
+                                      'Relationship Profile',
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineSmall,
                                     ),
                                   ],
                                 ),
-                              ),
-                            ),
-                          ].divide(const SizedBox(height: 8.0)),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).surfaceVariant,
-                            borderRadius: BorderRadius.circular(24.0),
-                            shape: BoxShape.rectangle,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 48.0,
-                                  height: 48.0,
-                                  decoration: BoxDecoration(
+                                FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor: Colors.transparent,
+                                  icon: Icon(
+                                    Icons.settings_rounded,
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius: BorderRadius.circular(9999.0),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  alignment:
-                                      const AlignmentDirectional(0.0, 0.0),
-                                  child: Icon(
-                                    Icons.link_rounded,
-                                    color: FlutterFlowTheme.of(context).tertiary,
+                                        .primaryText,
                                     size: 24.0,
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Partner Connected',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                              font: GoogleFonts.outfit(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge
-                                                        .fontStyle,
-                                              ),
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .fontStyle,
-                                              lineHeight: 1.6,
-                                            ),
-                                      ),
-                                      Text(
-                                        'Alex\'s iPhone 15 Pro',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .override(
-                                              font: GoogleFonts.outfit(
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall
-                                                        .fontStyle,
-                                              ),
-                                              color: FlutterFlowTheme.of(
-                                                      context)
-                                                  .secondaryText,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmall
-                                                      .fontStyle,
-                                              lineHeight: 1.5,
-                                            ),
-                                      ),
-                                    ].divide(const SizedBox(height: 4.0)),
-                                  ),
-                                ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
+                                  onPressed: () async {
                                     context.goNamed(
-                                        PartnerConnectionWidget.routeName);
+                                        SettingsPrivacyWidget.routeName);
                                   },
-                                  child: wrapWithModel(
-                                    model: _model.buttonModel,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: const ButtonWidget(
-                                      iconPresent: false,
-                                      iconEndPresent: false,
-                                      content: 'Manage',
-                                      variant: 'ghost',
-                                      size: 'small',
-                                      fullWidth: false,
-                                      loading: false,
-                                      disabled: false,
-                                    ),
-                                  ),
                                 ),
-                              ].divide(const SizedBox(width: 16.0)),
+                              ],
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 32.0),
-                      ].divide(const SizedBox(height: 32.0)),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+                          Expanded(
+                            child: SingleChildScrollView(
+                              primary: false,
+                              child: Padding(
+                                padding: const EdgeInsets.all(24.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    wrapWithModel(
+                                      model: _model.profileHeaderModel,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: ProfileHeaderWidget(
+                                        imageDesc: partnerData?.photoUrl !=
+                                                    null &&
+                                                partnerData!.photoUrl.isNotEmpty
+                                            ? partnerData.photoUrl
+                                            : 'https://dimg.dreamflow.cloud/v1/image/Couple%20laughing%20together%20in%20a%20garden',
+                                        names:
+                                            '${currentUserDisplayName.split(' ').first} & ${partnerName.split(' ').first}',
+                                        duration: relationshipDuration,
+                                      ),
+                                    ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 0.0, 0.0, 4.0),
+                                          child: Text(
+                                            'The Essentials',
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleSmall
+                                                .override(
+                                                  font: GoogleFonts
+                                                      .plusJakartaSans(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                  lineHeight: 1.4,
+                                                ),
+                                          ),
+                                        ),
+                                        wrapWithModel(
+                                          model: _model.infoTileModel1,
+                                          updateCallback: () =>
+                                              safeSetState(() {}),
+                                          child: InfoTileWidget(
+                                            tint: const Color(0x00000000),
+                                            icon: Icon(
+                                              Icons.favorite_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 20.0,
+                                            ),
+                                            label: 'Love Languages',
+                                            value: currentUserDocument!
+                                                    .loveLanguages.isNotEmpty
+                                                ? currentUserDocument!
+                                                    .loveLanguages
+                                                    .join(' & ')
+                                                : 'Not set yet',
+                                          ),
+                                        ),
+                                        wrapWithModel(
+                                          model: _model.infoTileModel2,
+                                          updateCallback: () =>
+                                              safeSetState(() {}),
+                                          child: InfoTileWidget(
+                                            tint: const Color(0x00000000),
+                                            icon: Icon(
+                                              Icons.auto_awesome_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 20.0,
+                                            ),
+                                            label: 'Shared Bucket List',
+                                            value: '12 items remaining',
+                                          ),
+                                        ),
+                                        wrapWithModel(
+                                          model: _model.infoTileModel3,
+                                          updateCallback: () =>
+                                              safeSetState(() {}),
+                                          child: InfoTileWidget(
+                                            tint: FlutterFlowTheme.of(context)
+                                                .tertiary,
+                                            icon: Icon(
+                                              Icons.psychology_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 20.0,
+                                            ),
+                                            label: 'Relationship Milestone',
+                                            value: coupleData
+                                                    ?.relationshipDuration ??
+                                                'Connected',
+                                          ),
+                                        ),
+                                      ].divide(const SizedBox(height: 16.0)),
+                                    ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Shared Goals',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleMedium
+                                                  .override(
+                                                    font: GoogleFonts
+                                                        .plusJakartaSans(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontStyle,
+                                                    lineHeight: 1.4,
+                                                  ),
+                                            ),
+                                            Text(
+                                              'View All',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelLarge
+                                                  .override(
+                                                    font: GoogleFonts.outfit(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelLarge
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelLarge
+                                                              .fontStyle,
+                                                    ),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge
+                                                            .fontStyle,
+                                                    lineHeight: 1.3,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                        if (coupleData?.primaryGoals != null &&
+                                            coupleData!
+                                                .primaryGoals.isNotEmpty)
+                                          ...coupleData.primaryGoals
+                                              .map((goal) =>
+                                                  wrapWithModel(
+                                                    model: _model
+                                                        .goalProgressModel1,
+                                                    updateCallback: () =>
+                                                        safeSetState(() {}),
+                                                    child: GoalProgressWidget(
+                                                      title: goal,
+                                                      deadline: 'Active Focus',
+                                                      progress: 0.5,
+                                                    ),
+                                                  ))
+                                              .toList()
+                                        else
+                                          Text(
+                                            'No goals set yet.',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                      ].divide(const SizedBox(height: 16.0)),
+                                    ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Our Lists',
+                                          style: FlutterFlowTheme.of(context)
+                                              .titleSmall
+                                              .override(
+                                                font: GoogleFonts
+                                                    .plusJakartaSans(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                ),
+                                                color: FlutterFlowTheme.of(
+                                                        context)
+                                                    .secondaryText,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                                fontStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                                lineHeight: 1.4,
+                                              ),
+                                        ),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(24.0),
+                                              shape: BoxShape.rectangle,
+                                              border: Border.all(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                wrapWithModel(
+                                                  model: _model
+                                                      .accordionItemModel1,
+                                                  updateCallback: () =>
+                                                      safeSetState(() {}),
+                                                  child:
+                                                      const AccordionItemWidget(
+                                                    title: 'Movie Wishlist',
+                                                    content:
+                                                        'Interstellar, Past Lives, About Time',
+                                                    open: false,
+                                                    last: false,
+                                                  ),
+                                                ),
+                                                wrapWithModel(
+                                                  model: _model
+                                                      .accordionItemModel2,
+                                                  updateCallback: () =>
+                                                      safeSetState(() {}),
+                                                  child:
+                                                      const AccordionItemWidget(
+                                                    title:
+                                                        'Restaurant Wishlist',
+                                                    content:
+                                                        'Le Petit Bistro, Sushi Zen, The Garden Cafe',
+                                                    open: false,
+                                                    last: false,
+                                                  ),
+                                                ),
+                                                wrapWithModel(
+                                                  model: _model
+                                                      .accordionItemModel3,
+                                                  updateCallback: () =>
+                                                      safeSetState(() {}),
+                                                  child:
+                                                      const AccordionItemWidget(
+                                                    title: 'Gift Ideas',
+                                                    content:
+                                                        'New Espresso Machine, Weekend Spa Trip',
+                                                    open: true,
+                                                    last: true,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ].divide(const SizedBox(height: 8.0)),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .surfaceVariant,
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        shape: BoxShape.rectangle,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(24.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 48.0,
+                                              height: 48.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      0.0, 0.0),
+                                              child: Icon(
+                                                Icons.link_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiary,
+                                                size: 24.0,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Partner Connected',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .outfit(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyLarge
+                                                                  .fontStyle,
+                                                          lineHeight: 1.6,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    partnerName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodySmall
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .outfit(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontStyle,
+                                                          ),
+                                                          color:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondaryText,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                          lineHeight: 1.5,
+                                                        ),
+                                                  ),
+                                                ].divide(const SizedBox(
+                                                    height: 4.0)),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.goNamed(
+                                                    PartnerConnectionWidget
+                                                        .routeName);
+                                              },
+                                              child: wrapWithModel(
+                                                model: _model.buttonModel,
+                                                updateCallback: () =>
+                                                    safeSetState(() {}),
+                                                child: const ButtonWidget(
+                                                  iconPresent: false,
+                                                  iconEndPresent: false,
+                                                  content: 'Manage',
+                                                  variant: 'ghost',
+                                                  size: 'small',
+                                                  fullWidth: false,
+                                                  loading: false,
+                                                  disabled: false,
+                                                ),
+                                              ),
+                                            ),
+                                          ].divide(const SizedBox(width: 16.0)),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 32.0),
+                                  ].divide(const SizedBox(height: 32.0)),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              );
+            },
           ),
         ),
       ),

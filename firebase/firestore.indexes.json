@@ -1,3 +1,19 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "prompt_responses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "couple_ref",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_at",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
 }

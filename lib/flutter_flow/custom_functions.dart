@@ -5,3 +5,6 @@ export '/custom_code/functions/gift_count.dart';
 export '/custom_code/functions/filtered_memories.dart';
 export '/custom_code/functions/anniversary_countdown.dart';
 export '/custom_code/functions/relationship_duration_label.dart';
+export '/custom_code/functions/next_anniversary_info.dart';
+export '/custom_code/functions/get_anniversaries_list.dart';
+export '/custom_code/functions/get_daily_prompt.dart';
